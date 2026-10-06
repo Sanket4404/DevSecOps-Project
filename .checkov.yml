@@ -1,0 +1,8 @@
+compact:
+  - CKV_AWS_39   # Public access to EKS endpoint (needed for kubectl)
+  - CKV_AWS_58   # EKS public endpoint (intentional for dev access)
+soft-fail: false
+framework:
+  - terraform
+directory:
+  - terraform
