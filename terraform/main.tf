@@ -57,8 +57,9 @@ module "eks" {
   subnet_ids = module.vpc.private_subnets
 
   # Security: enable private endpoint, public for initial kubectl access
-  cluster_endpoint_public_access  = true
-  cluster_endpoint_private_access = true
+  cluster_endpoint_public_access       = true
+  cluster_endpoint_public_access_cidrs = ["106.78.37.201/32"]
+  cluster_endpoint_private_access      = true
 
   # Auth mode required for Auto Mode
   authentication_mode = "API"

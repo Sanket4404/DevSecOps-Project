@@ -1,31 +1,29 @@
-terraform {
-  required_version = ">= 1.5.0"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-
-  # Uncomment and configure for remote state (recommended for teams)
-  # backend "s3" {
-  #   bucket         = "jerney-terraform-state"
-  #   key            = "eks/terraform.tfstate"
-  #   region         = "us-east-1"
-  #   dynamodb_table = "jerney-tf-lock"
-  #   encrypt        = true
-  # }
+variable "aws_region" {
+  description = "AWS region where the Jerney infrastructure will be deployed"
+  type        = string
+  default     = "us-east-1"
 }
 
-provider "aws" {
-  region = var.aws_region
+variable "environment" {
+  description = "Deployment environment"
+  type        = string
+  default     = "dev"
+}
 
-  default_tags {
-    tags = {
-      Project     = "Jerney"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    }
-  }
+variable "cluster_name" {
+  description = "Name of the EKS cluster"
+  type        = string
+  default     = "jerney-eks"
+}
+
+variable "cluster_version" {
+  description = "Kubernetes version for the EKS cluster"
+  type        = string
+  default     = "1.36"
+}
+
+variable "vpc_cidr" {
+  description = "CIDR block for the Jerney VPC"
+  type        = string
+  default     = "10.0.0.0/16"
 }

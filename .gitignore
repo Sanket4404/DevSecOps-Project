@@ -1,14 +1,19 @@
 node_modules/
 dist/
 .env
+.env.*
 *.log
 
 # Terraform
 terraform/.terraform/
 terraform/*.tfstate
-terraform/*.tfstate.backup
-terraform/.terraform.lock.hcl
+terraform/*.tfstate.*
 terraform/crash.log
+terraform/*.tfvars
+terraform/*.tfvars.json
+
+# Keep Terraform dependency lock file
+!terraform/.terraform.lock.hcl
 
 # Docker
 *.tar
@@ -16,3 +21,9 @@ terraform/crash.log
 # OS
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

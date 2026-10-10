@@ -19,8 +19,8 @@ permissions:
 
 env:
   DOCKER_REGISTRY: ghcr.io
-  BACKEND_IMAGE: ghcr.io/${{ github.repository }}/jerney-backend
-  FRONTEND_IMAGE: ghcr.io/${{ github.repository }}/jerney-frontend
+  BACKEND_IMAGE: ghcr.io/sanket4404/devsecops-project/jerney-backend
+  FRONTEND_IMAGE: ghcr.io/sanket4404/devsecops-project/jerney-frontend
 
 jobs:
   # ==============================================================
