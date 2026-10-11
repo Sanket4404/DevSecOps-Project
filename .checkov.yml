@@ -1,8 +1,15 @@
-compact:
-  - CKV_AWS_39   # Public access to EKS endpoint (needed for kubectl)
-  - CKV_AWS_58   # EKS public endpoint (intentional for dev access)
+# Jerney Checkov configuration
+
+compact: true
+
 soft-fail: false
+
 framework:
   - terraform
+
 directory:
   - terraform
+
+skip-check:
+  - CKV_AWS_39
+  - CKV_AWS_58

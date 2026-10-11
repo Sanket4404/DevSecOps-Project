@@ -177,7 +177,7 @@ jobs:
           severity: "CRITICAL,HIGH"
           timeout: "10m"
 
-  #   # ==============================================================
+  #     # ==============================================================
   # STAGE 5: IaC Security Scan
   # Checkov - Terraform + Kubernetes
   # ==============================================================
@@ -195,7 +195,7 @@ jobs:
           docker run --rm \
             -v "$PWD:/workspace" \
             -w /workspace \
-            bridgecrew/checkov:3.3.21 \
+            bridgecrew/checkov:latest \
             -d terraform/ \
             --framework terraform \
             --skip-check CKV_AWS_39,CKV_AWS_58 \
@@ -207,7 +207,7 @@ jobs:
           docker run --rm \
             -v "$PWD:/workspace" \
             -w /workspace \
-            bridgecrew/checkov:3.3.21 \
+            bridgecrew/checkov:latest \
             -d k8s/ \
             --framework kubernetes \
             --output cli
