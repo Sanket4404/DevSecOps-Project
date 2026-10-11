@@ -1,5 +1,5 @@
 # ---- Build stage ----
-FROM node:20-alpine AS build
+FROM node:24-alpine3.23 AS build
 
 WORKDIR /app
 
@@ -10,14 +10,15 @@ RUN npm install --omit=dev && \
 
 
 # ---- Production stage ----
-FROM node:20-alpine AS production
+FROM node:24-alpine3.23 AS production
 
 # Create non-root application user
 RUN addgroup -S appgroup && \
     adduser -S appuser -G appgroup
 
 # Install dumb-init for proper PID 1 signal handling
-RUN apk add --no-cache dumb-init
+RUN apk upgrade --no-cache \
+    && apk add --no-cache dumb-init=1.2.5-r3
 
 WORKDIR /app
 
