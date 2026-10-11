@@ -156,31 +156,30 @@ Manifest: `k8s/jerney.yaml`, namespace `jerney`.
 
 **Successful run** (commit `10181b4`, 2m 24s): lint, dependency audit, build, image scan, IaC scan and Dockerfile lint all pass, then the Kubernetes manifest is updated.
 
-![Pipeline success](docs/screenshots/01-pipeline-success.png)
-
-**The gates block bad changes** (run #3): Hadolint (backend), the Checkov IaC scan and the Trivy backend image scan failed, so **Update K8s Manifest was skipped** and nothing was promoted. These findings were fixed in the following commits.
-
-![Pipeline gate blocked](docs/screenshots/02-pipeline-gate-blocked.png)
+<img width="1413" height="653" alt="Screenshot from 2026-10-11 20-14-22" src="https://github.com/user-attachments/assets/dbf03f05-224d-4c09-870f-930167a6f0ce" />
 
 ### AWS EKS
 
 **Cluster overview:** Active, Kubernetes 1.36, 1 node, 5 pods, 0 managed node groups (EKS Auto Mode manages compute). Account identifiers are redacted.
 
-![EKS cluster](docs/screenshots/03-eks-cluster.png)
+<img width="1902" height="778" alt="Screenshot from 2026-10-11 20-20-33" src="https://github.com/user-attachments/assets/d077aa59-7653-435b-91e9-fc3b385580f8" />
+
 
 **Workloads running** (5 pods: 2 backend, 2 frontend, 1 database):
 
-![EKS pods](docs/screenshots/04-eks-pods.png)
+<img width="1902" height="778" alt="Screenshot from 2026-10-11 20-20-47" src="https://github.com/user-attachments/assets/ded13b26-dae2-46e8-ad2b-40b7b70ce90f" />
+
 
 **Workload status:** 5 of 5 pods, 3 of 3 deployments and 3 of 3 ReplicaSets running (100%).
 
-![EKS workload status](docs/screenshots/05-eks-workload-status.png)
+<img width="1902" height="778" alt="Screenshot from 2026-10-11 20-21-24" src="https://github.com/user-attachments/assets/fbb8cf8b-65da-41fc-83c1-8f61233c633d" />
 
 ### VPC
 
 **Resource map:** 3 public and 3 private subnets across 3 availability zones, separate public and private route tables, and a single NAT gateway.
 
-![VPC resource map](docs/screenshots/06-vpc-resource-map.png)
+<img width="1920" height="932" alt="Screenshot from 2026-10-11 21-05-02" src="https://github.com/user-attachments/assets/c3a23592-eafc-4451-8e4a-042e946e3eb8" />
+
 
 ---
 
