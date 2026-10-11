@@ -3,14 +3,16 @@
 # ==============================================================
 
 data "aws_availability_zones" "available" {
+  state = "available"
+
   filter {
-    name   = "opt-in-status"
-    values = ["opt-in-not-required"]
+    name   = "zone-name"
+    values = ["us-east-1a", "us-east-1b", "us-east-1c"]
   }
 }
 
 locals {
-  azs = slice(data.aws_availability_zones.available.names, 0, 3)
+  azs = data.aws_availability_zones.available.names
 }
 
 # ---- VPC ----
@@ -58,7 +60,7 @@ module "eks" {
 
   # Security: enable private endpoint, public for initial kubectl access
   cluster_endpoint_public_access       = true
-  cluster_endpoint_public_access_cidrs = ["106.78.37.201/32"]
+  cluster_endpoint_public_access_cidrs = ["106.78.36.189/32"]
   cluster_endpoint_private_access      = true
 
   # Auth mode required for Auto Mode

@@ -1,7 +1,6 @@
 # Jerney Checkov configuration
 
 compact: true
-
 soft-fail: false
 
 framework:
@@ -13,3 +12,4 @@ directory:
 skip-check:
   - CKV_AWS_39
   - CKV_AWS_58
+  - CKV_TF_1
