@@ -200,32 +200,23 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install --upgrade checkov
 
-      # Force Checkov to use a clean config file.
-      # This avoids the configargparse AssertionError that was
-      # occurring before Checkov could scan the Terraform code.
-      - name: Create clean Checkov config
-        run: |
-          cat > /tmp/checkov.yml <<'EOF'
-          {}
-          EOF
-
       - name: Run Checkov on Terraform
         run: |
           checkov \
-            --config-file /tmp/checkov.yml \
             -d terraform/ \
             --framework terraform \
             --skip-check CKV_AWS_39,CKV_AWS_58 \
-            --output cli
+            --output cli \
+            --quiet
 
       - name: Run Checkov on Kubernetes manifests
         continue-on-error: true
         run: |
           checkov \
-            --config-file /tmp/checkov.yml \
             -d k8s/ \
             --framework kubernetes \
-            --output cli
+            --output cli \
+            --quiet
 
   # ==============================================================
   # STAGE 6: Dockerfile Lint
