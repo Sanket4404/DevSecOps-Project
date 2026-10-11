@@ -16,9 +16,16 @@ FROM node:24-alpine3.23 AS production
 RUN addgroup -S appgroup && \
     adduser -S appuser -G appgroup
 
-# Install dumb-init for proper PID 1 signal handling
-RUN apk upgrade --no-cache \
-    && apk add --no-cache dumb-init=1.2.5-r3
+# Update Alpine packages and install dumb-init
+RUN apk upgrade --no-cache && \
+    apk add --no-cache dumb-init=1.2.5-r3
+
+# npm/npx are not required in the runtime container.
+# Removing them reduces the attack surface and removes
+# vulnerabilities bundled with npm dependencies such as undici.
+RUN rm -rf /usr/local/lib/node_modules/npm && \
+    rm -f /usr/local/bin/npm && \
+    rm -f /usr/local/bin/npx
 
 WORKDIR /app
 
