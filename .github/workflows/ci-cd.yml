@@ -177,7 +177,7 @@ jobs:
           severity: "CRITICAL,HIGH"
           timeout: "10m"
 
-  # ==============================================================
+  #   # ==============================================================
   # STAGE 5: IaC Security Scan
   # Checkov - Terraform + Kubernetes
   # ==============================================================
@@ -190,33 +190,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install Checkov
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade checkov
-
       - name: Run Checkov on Terraform
         run: |
-          checkov \
+          docker run --rm \
+            -v "$PWD:/workspace" \
+            -w /workspace \
+            bridgecrew/checkov:3.3.21 \
             -d terraform/ \
             --framework terraform \
             --skip-check CKV_AWS_39,CKV_AWS_58 \
-            --output cli \
-            --quiet
+            --output cli
 
       - name: Run Checkov on Kubernetes manifests
         continue-on-error: true
         run: |
-          checkov \
+          docker run --rm \
+            -v "$PWD:/workspace" \
+            -w /workspace \
+            bridgecrew/checkov:3.3.21 \
             -d k8s/ \
             --framework kubernetes \
-            --output cli \
-            --quiet
+            --output cli
 
   # ==============================================================
   # STAGE 6: Dockerfile Lint
